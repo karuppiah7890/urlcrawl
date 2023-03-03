@@ -19,7 +19,13 @@ func main() {
 		log.Fatalf("error occurred while getting html page for %s: %v", link, err)
 	}
 
+	// TODO: get all the href links from anchor tags
 	parseHtml(response)
+
+	// TODO: prefix relative URL paths starting with "/", "#" with the website link
+
+	// TODO: recursively get the html page of all the links within the domain / link.
+	// TODO: stop recursion after getting the html page of one external domain / link - no recursion for external links / domains.
 }
 
 func getHtmlPage(link string) (string, error) {
@@ -27,6 +33,8 @@ func getHtmlPage(link string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("error occurred while sending request to %s: %v", link, err)
 	}
+
+	// TODO: Check if the response code is 404
 
 	contentType := res.Header.Get("Content-Type")
 	if contentType != "text/html" {
